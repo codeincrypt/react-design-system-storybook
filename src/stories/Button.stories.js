@@ -1,5 +1,5 @@
 import Button from '../components/Button';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 
 const meta = {
   title: "Button",

@@ -1,5 +1,5 @@
 import Input from '../components/Input';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 
 const meta = {
   title: "Input",
