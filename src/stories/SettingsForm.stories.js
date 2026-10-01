@@ -1,5 +1,5 @@
 import SettingsForm from '../components/SettingsForm';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 
 const meta = {
   title: "Blocks/SettingsForm",

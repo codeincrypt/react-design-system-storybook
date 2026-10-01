@@ -1,5 +1,5 @@
 import LoginForm from '../components/LoginForm';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 
 const meta = {
   title: "Blocks/LoginForm",

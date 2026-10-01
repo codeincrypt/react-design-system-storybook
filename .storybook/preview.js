@@ -1,7 +1,7 @@
 import React from 'react';
 import ThemeProvider from '../src/theme/ThemeProvider';
 
-/** @type { import('@storybook/react').Preview } */
+/** @type { import('@storybook/react-webpack5').Preview } */
 const preview = {
   parameters: {
     controls: {

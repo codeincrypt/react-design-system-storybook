@@ -1,5 +1,5 @@
 import Select from '../components/Select';
-import { fn } from '@storybook/test';
+import { fn } from 'storybook/test';
 
 const meta = {
   title: "Select",
