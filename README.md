@@ -1,70 +1,88 @@
-# Getting Started with Create React App
+# @codeincrypt/design-system
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React design system built as thin wrappers around [Ant Design](https://ant.design/) (v5), documented and visually tested with [Storybook](https://storybook.js.org/) and [Chromatic](https://www.chromatic.com/).
 
-## Available Scripts
+Every component forwards all of its props to the underlying Ant Design component, so the full Ant Design API is available while the design system remains the single place to customise behaviour and styling.
 
-In the project directory, you can run:
+## Installation
 
-### `npm start`
+```bash
+npm install @codeincrypt/design-system
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Peer requirements: `react` and `react-dom` ^18, and `antd` ^5.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Usage
 
-### `npm test`
+```jsx
+import { Button, Input, Select } from '@codeincrypt/design-system';
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+export default function Example() {
+  return (
+    <>
+      <Input placeholder="Your name" />
+      <Button type="primary">Submit</Button>
+    </>
+  );
+}
+```
 
-### `npm run build`
+## Components
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Components live in [src/components/](src/components/), each with a matching Storybook story in [src/stories/](src/stories/).
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+| Component | Component | Component | Component |
+| --- | --- | --- | --- |
+| Alert | Avatar | Badge | Breadcrumb |
+| Button | Card | Checkbox | DatePicker |
+| Drawer | Dropdown | Empty | Input |
+| Menu | Modal | Pagination | Paragraph |
+| Popconfirm | Radio | Select | Sidebar |
+| Skeleton | Spinner | Stepper | Switch |
+| Table | Tabs | Tag | Textarea |
+| Tooltip | Upload | | |
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+> **Note:** the package entry ([src/components/index.ts](src/components/index.ts)) currently exports only `Button`, `Breadcrumb`, `Input`, `Paragraph` and `Select`. The remaining components are available in Storybook and need to be added to `index.ts` before they can be imported from the package.
 
-### `npm run eject`
+## Adding a component
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+1. Create `src/components/MyComponent.jsx`, wrapping the Ant Design equivalent:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+   ```jsx
+   import { Button as AntButton } from 'antd';
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+   const Button = (props) => <AntButton {...props} />;
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+   export default Button;
+   ```
 
-## Learn More
+2. Add a story at `src/stories/MyComponent.stories.js` (the `autodocs` tag is enabled globally in [.storybook/preview.js](.storybook/preview.js), so a docs page is generated automatically).
+3. Export it from [src/components/index.ts](src/components/index.ts).
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Scripts
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Command | Description |
+| --- | --- |
+| `npm run storybook` | Start Storybook on [http://localhost:6006](http://localhost:6006) |
+| `npm run build-storybook` | Build the static Storybook site |
+| `npm run chromatic` | Publish Storybook to Chromatic for visual review |
+| `npm start` | Run the Create React App dev server on [http://localhost:3000](http://localhost:3000) |
+| `npm test` | Run tests in watch mode |
+| `npm run build` | Production build into `build/` |
 
-### Code Splitting
+## Tech stack
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- React 18
+- Ant Design 5 and `@ant-design/icons`
+- Storybook 8 (React + Webpack 5, essentials, interactions, links)
+- Chromatic for visual regression testing
+- Create React App (`react-scripts` 5)
 
-### Analyzing the Bundle Size
+## Publishing
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+The package is published publicly to npm as `@codeincrypt/design-system`:
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```bash
+npm version <patch|minor|major>
+npm publish
+```

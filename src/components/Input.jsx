@@ -5,4 +5,9 @@ const Input= (props) => {
     <AntInput {...props} />
   )
 };
-export default Input; 
+
+Input.Password = AntInput.Password;
+Input.Search = AntInput.Search;
+Input.TextArea = AntInput.TextArea;
+
+export default Input;
